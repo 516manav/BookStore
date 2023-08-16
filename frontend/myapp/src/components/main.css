@@ -1,0 +1,12 @@
+.sp_list{
+    flex:1
+}
+.sp_map{
+    flex:2
+}
+.leaflet-container{
+    height: 100%;
+}
+.sp_imgfit{
+    object-fit: contain;
+}
