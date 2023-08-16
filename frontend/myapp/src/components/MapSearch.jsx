@@ -7,9 +7,7 @@ import Mapi from './Mapi'
 
    
       const [selectPosition, setSelectPosition] = useState(null);
-      const Asign=(text)=>{
-        setSelectPosition(text)
-      }
+   
  
 
        const isLoaded=true;
@@ -17,7 +15,7 @@ import Mapi from './Mapi'
       if (isLoaded) {
         return (
           <div className="flex w-full h-full overflow-y-scroll flex-col ">
-            <div className="w-full h-20 bg-cyan-400 z-30 ">
+            <div className="w-full h-20 bg-cyan-700 z-30 ">
               <Nav
                 selectPosition={selectPosition}
                 setSelectPosition={setSelectPosition}
