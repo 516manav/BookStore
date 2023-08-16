@@ -3,7 +3,7 @@ import Nav from './Nav'
 import "./main.css"
 import Mapi from './Mapi'
 
-const Home = () => {
+ const MapSearch = () => {
 
    
       const [selectPosition, setSelectPosition] = useState(null);
@@ -48,4 +48,4 @@ const Home = () => {
 
 }
 
-export default Home
+export default MapSearch

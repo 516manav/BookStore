@@ -31,6 +31,8 @@ const Mapi = (props) => {
     navigator.geolocation.getCurrentPosition(
       ({ coords: { latitude, longitude } }) => {
         console.log({ latitude, longitude });
+        localStorage.setItem("lat",latitude);
+        localStorage.setItem("lng",longitude);
         setSelectPosition({lat:latitude, lon:longitude});
       }
     );

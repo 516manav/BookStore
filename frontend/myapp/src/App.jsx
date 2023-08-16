@@ -2,9 +2,9 @@ import "./App.css";
 import SiginUp from "./components/SiginIn";
 import Login from "./components/Login";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./components/Home";
-import DonateForm from "./components/DonateForm";
 
+import DonateForm from "./components/DonateForm";
+import MapSearch from "./components/MapSearch";
 function App() {
   return (
     <div className="flex w-screen h-screen">
@@ -12,7 +12,7 @@ function App() {
         <Routes>
           <Route path="/" Component={SiginUp}></Route>
           <Route path="/login" Component={Login}></Route>
-          <Route path="/home" Component={Home}></Route>
+          <Route path="/map" Component={MapSearch}></Route>
           <Route path="/home/donate" Component={DonateForm}></Route>
         </Routes>
       </BrowserRouter>
