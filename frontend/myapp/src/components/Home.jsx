@@ -17,7 +17,7 @@ const Home = () => {
       if (isLoaded) {
         return (
           <div className="flex w-full h-full overflow-y-scroll flex-col ">
-            <div className="w-full h-20 bg-cyan-200 z-30 ">
+            <div className="w-full h-20 bg-cyan-700 z-30 ">
               <Nav
                 selectPosition={selectPosition}
                 setSelectPosition={setSelectPosition}
