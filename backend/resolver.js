@@ -28,8 +28,9 @@ const { BooksOffered, BooksDonated, BooksRecieved } = require("./functions/users
 
         },
         Books:{
-             userD:(_,args,{username,useremail})=>{
-                return UserD({useremail,username})
+             userD:async(_,args,{username,useremail})=>{
+       
+                return UserD({useremail:useremail,username:username})
              }
         },
         Mutation:{
@@ -39,8 +40,8 @@ const { BooksOffered, BooksDonated, BooksRecieved } = require("./functions/users
             Login:(_,args)=>{
                 return Login(args)
             },
-            DonateBook:(_,args)=>{
-                return DonateBook(args)
+            DonateBook:(_,args,{userId})=>{
+                return DonateBook({...args,userId:userId})
             },
             CreateRequest:(_,args,{userId})=>{
                 return CreateRequest({...args,sellerId:userId})

@@ -3,7 +3,7 @@ import BackGround from "./BackGround";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { SIGN_IN } from "../queries/querey";
-
+import {toast}from "react-toastify"
 const SiginUp = () => {
   const [NameErr, setNameErr] = useState(false);
   const [EmailEmp, setEmailEmp] = useState(false);
@@ -65,7 +65,7 @@ const SiginUp = () => {
       }
     }
     if (a + b + c === 3) {
-      alert("regis")
+      
       resgister({
         variables: {
           name: Name,
@@ -76,12 +76,32 @@ const SiginUp = () => {
     
     }
     if(data){
+      toast.success("Registered", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       const token = data.SignIn;
       localStorage.setItem("token",token);
-      navigate("/home")
+      navigate("/map")
     }
     if(error){
-      alert(error.message)
+
+            toast.error(error.message, {
+              position: "top-center",
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
     }
   };
   return (

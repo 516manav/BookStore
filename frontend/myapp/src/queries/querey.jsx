@@ -13,40 +13,46 @@ mutation Login($email: String, $password: String) {
 `;
 
 export const DONATE_BOOK = gql`
-  mutation DonateBook(
+  mutation Mutation(
     $title: String
     $author: String
     $description: String
-    $price: String
-    $image: String
     $contact: String
     $lat: String
     $lng: String
+    $price: String
+    $image: String
     $address: String
+    $genre: String
   ) {
     DonateBook(
       title: $title
       author: $author
       description: $description
-      price: $price
-      image: $image
       contact: $contact
       lat: $lat
       lng: $lng
+      price: $price
+      image: $image
       address: $address
+      genre: $genre
     ) {
       address
       author
+      buyerId
+      by
       contact
       description
-      gener
+      genre
       image
+      lat
+      lng
       location
       price
       title
       userD {
-        userEmail
         username
+        userEmail
       }
     }
   }

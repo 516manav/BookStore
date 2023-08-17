@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const Book = require("../models/book");
 const Request = require("../models/request");
-require('dotenv').config()
+
 
 
 const SignIn = async ({ name, email, password }) => {
@@ -11,32 +11,42 @@ const SignIn = async ({ name, email, password }) => {
     const user = await User.create({
         name: name, email: email, password: hashedPassword
     });
-    const token = jwt.sign({ userId: user._id,name:user.name,email:user.email }, process.env.JWT_SECERT||"shiv");
+    const token = jwt.sign({ userId: user._id,username:user.name,useremail:user.email }, "shivam");
     return token;
 }
 
 const Login = async ({ email, password }) => {
-    const user = await User.findOne({
-        email: email
-    })
-    if (!user) {
-        throw new Error("User does not exists")
+    try{
+       
+        const user = await User.findOne({
+            email: email
+        })
+        if (!user) {
+            throw new Error("User does not exists")
+        }
+
+        const matched = await bycrypt.compare(password, user.password);
+
+        if (matched) {
+          
+            const token = jwt.sign({ userId: user._id, username: user.name, useremail: user.email },  "shivam");
+            return token;
+        }
+        else {
+
+            throw new Error("Invalid email or password");
+        }
     }
-    const matched = await bycrypt.compare(password, user.password);
- 
-    if (matched) {
-        const token = jwt.sign({ userId: user._id, name: user.name, email: user.email }, process.env.JWT_SECERT || "shiv");
-        return token;
+    catch(e){
+        console.log(e.message())
     }
-    else {
-        throw new Error("Invalid email or password");
-    }
+
 
 }
 
-const DonateBook=async({title,author,description,contact,lat,lng,gener,price,userId,image,address})=>{
+const DonateBook=async({title,author,description,contact,lat,lng,gener,price,image,address})=>{
+    console.log(6)
     let Bookie={
-        by:userId,
         title,
         author,
         gener,
