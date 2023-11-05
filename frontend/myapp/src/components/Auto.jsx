@@ -24,10 +24,9 @@ const Autos = ({ selectPosition, setSelectPosition }) => {
     fetch(`${NOMINATIM_BASE_URL}${queryString}`, requestOptions)
       .then((response) => response.text())
       .then((result) => {
-        console.log(JSON.parse(result));
         setListPlace(JSON.parse(result));
       })
-      .catch((err) => console.log("err: ", err));
+      .catch((err) => alert("Unable to get the location"));
   };
   return (
     <div className="flex">

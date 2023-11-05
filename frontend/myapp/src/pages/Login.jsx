@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import BackGround from "./BackGround";
+import BackGround from "../components/BackGround";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { LOGIN } from "../queries/querey";

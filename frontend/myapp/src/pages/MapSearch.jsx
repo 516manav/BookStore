@@ -1,15 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import Nav from './Nav'
-import "./main.css"
-import Mapi from './Mapi'
+import Nav from '../components/Nav'
+import Map from '../components/Map'
 
  const MapSearch = () => {
-
-   
       const [selectPosition, setSelectPosition] = useState(null);
-   
- 
-
        const isLoaded=true;
 
       if (isLoaded) {
@@ -24,9 +18,7 @@ import Mapi from './Mapi'
             <div className="flex w-full h-full">
               <div className="flex flex-col w-full h-full bg-slate-300 sp_list"></div>
               <div className="flex flex-col w-full h-full  sp_map">
-                {/* <Gmap coord={coord}></Gmap> *
-                {/* <Map coord={coord}></Map> */}
-                <Mapi
+                <Map
                   selectPosition={selectPosition}
                   setSelectPosition={setSelectPosition}
                 />
@@ -35,14 +27,7 @@ import Mapi from './Mapi'
           </div>
         );
       }
-    //  const onLoad = (autoC) => setAutocomplete(autoC);
-
-    //  const onPlaceChanged = () => {
-    //    const lat = autocomplete.getPlace().geometry.location.lat();
-    //    const lng = autocomplete.getPlace().geometry.location.lng();
-
-    //    setcoord({ lat, lng });
-    //  };
+ 
 
 }
 

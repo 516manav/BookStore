@@ -1,10 +1,10 @@
 import "./App.css";
-import SiginUp from "./components/SiginIn";
-import Login from "./components/Login";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Login from "./pages/Login"
+import SiginUp from "./pages/SiginIn"
+import MapSearch from "./pages/MapSearch";
+import DonateForm from "./pages/DonateForm";
 
-import DonateForm from "./components/DonateForm";
-import MapSearch from "./components/MapSearch";
 function App() {
   return (
     <div className="flex w-screen h-screen">

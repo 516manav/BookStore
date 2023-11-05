@@ -16,7 +16,6 @@ const Nav = ({ selectPosition, setSelectPosition }) => {
           setSelectPosition={setSelectPosition}
         ></Autos>
       </div>
-
       <div className="flex text-xl font-semibold mr-5">
         <button 
         onClick={()=>{logout()}}

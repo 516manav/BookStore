@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
-import ImageInput from './ImageInput';
-import HoverRating from './Rating';
-import MultipleSelect from './SelectGenre';
+import ImageInput from '../components/ImageInput';
+import HoverRating from '../components/Rating';
+import MultipleSelect from '../components/SelectGenre';
 
 const DonateForm = () => {
     const [Details,setDetails]=useState({});

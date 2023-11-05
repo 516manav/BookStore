@@ -1,24 +1,24 @@
 import React, { useRef, useState } from "react";
-import BackGround from "./BackGround";
+import BackGround from "../components/BackGround";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { SIGN_IN } from "../queries/querey";
 
 const SiginUp = () => {
   const [NameErr, setNameErr] = useState(false);
-  const [EmailEmp, setEmailEmp] = useState(false);
-  const [EmailErr, setEmailErr] = useState(false);
+  const [phoneEmp, setphoneEmp] = useState(false);
+  const [phoneErr, setphoneErr] = useState(false);
   const [PassEmp, setPassEmp] = useState(false);
   const [PassErr, setPassErr] = useState(false);
   const name = useRef();
-  const email = useRef();
+  const phone = useRef();
   const pass = useRef();
   const navigate = useNavigate();
 
 
   const [resgister,{data,loading,error}]=useMutation(SIGN_IN)
-  const validateEmail = (email) => {
-    return String(email)
+  const validatephone = (phone) => {
+    return String(phone)
       .toLowerCase()
       .match(
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -29,7 +29,7 @@ const SiginUp = () => {
   };
   const handleRegister = (e) => {
     const Name = name.current.value;
-    const Email = email.current.value;
+    const phone = phone.current.value;
     const Pass = pass.current.value;
     let a = 0,
       b = 0,
@@ -42,15 +42,15 @@ const SiginUp = () => {
       a = 1;
     }
 
-    if (!Email) {
-      setEmailEmp(true);
+    if (!phone) {
+      setphoneEmp(true);
     } else {
-      setEmailEmp(false);
-      if (validateEmail(Email)) {
+      setphoneEmp(false);
+      if (validatephone(phone)) {
         b = 1;
-        setEmailErr(false);
+        setphoneErr(false);
       } else {
-        setEmailErr(true);
+        setphoneErr(true);
       }
     }
     if (!Pass) {
@@ -69,7 +69,7 @@ const SiginUp = () => {
       resgister({
         variables: {
           name: Name,
-          email: Email,
+          phone: phone,
           password: Pass,
         },
       });
@@ -110,20 +110,20 @@ const SiginUp = () => {
         </div>
         <div className="flex flex-col ">
           <span className="text-slate-200 font-thin my-2 text-xl mb-3">
-            Email
+            phone
           </span>
           <input
             type="text"
             className="sm:w-72 w-64 h-10 rounded-lg outline-none px-2 py-2 font-medium "
-            ref={email}
+            ref={phone}
           />
-          {EmailEmp && (
+          {phoneEmp && (
             <small className="text-red-600 text-[1rem] ">
-              Please enter the email
+              Please enter the phone
             </small>
           )}
-          {EmailErr && (
-            <small className="text-red-600 text-[1rem] ">Invaild email</small>
+          {phoneErr && (
+            <small className="text-red-600 text-[1rem] ">Invaild phone</small>
           )}
         </div>
         <div className="flex flex-col my-2">

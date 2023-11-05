@@ -23,7 +23,7 @@ function ResetCenterView(props) {
 
   return null;
 }
-const Mapi = (props) => {
+const Map = (props) => {
     const {selectPosition,setSelectPosition}=props
   const locationSelection = [selectPosition?.lat, selectPosition?.lon];
   
@@ -63,7 +63,10 @@ const Mapi = (props) => {
             return (
               <Marker position={mark.geocode} key={index}>
                 <Popup>
-                  <h2>{mark.text}</h2>
+                  <div className="text-3xl">
+                    <div>HElli</div>
+                    <div>{mark.text}</div>
+                  </div>
                 </Popup>
               </Marker>
             );
@@ -75,4 +78,4 @@ const Mapi = (props) => {
   }
 };
 
-export default Mapi;
+export default Map;
