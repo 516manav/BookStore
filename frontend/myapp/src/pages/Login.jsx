@@ -1,22 +1,21 @@
 import React, { useRef, useState } from "react";
-import BackGround from "./BackGround";
+import BackGround from "../components/BackGround";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
-import { SIGN_IN } from "../queries/querey";
-import {toast}from "react-toastify"
-const SiginUp = () => {
-  const [NameErr, setNameErr] = useState(false);
+import { LOGIN } from "../queries/querey";
+import {toast} from "react-toastify"
+const Login = () => {
   const [EmailEmp, setEmailEmp] = useState(false);
   const [EmailErr, setEmailErr] = useState(false);
   const [PassEmp, setPassEmp] = useState(false);
   const [PassErr, setPassErr] = useState(false);
-  const name = useRef();
   const email = useRef();
   const pass = useRef();
   const navigate = useNavigate();
-
-
-  const [resgister,{data,loading,error}]=useMutation(SIGN_IN)
+  const [login,{data,loading,error}]=useMutation(LOGIN);
+  const sign = () => {
+    navigate("/");
+  };
   const validateEmail = (email) => {
     return String(email)
       .toLowerCase()
@@ -24,23 +23,11 @@ const SiginUp = () => {
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       );
   };
-  const log = () => {
-    navigate("/login");
-  };
   const handleRegister = (e) => {
-    const Name = name.current.value;
     const Email = email.current.value;
     const Pass = pass.current.value;
-    let a = 0,
-      b = 0,
+    let b = 0,
       c = 0;
-
-    if (!Name) {
-      setNameErr(true);
-    } else {
-      setNameErr(false);
-      a = 1;
-    }
 
     if (!Email) {
       setEmailEmp(true);
@@ -64,19 +51,17 @@ const SiginUp = () => {
         c = 1;
       }
     }
-    if (a + b + c === 3) {
-      
-      resgister({
+    if (b + c === 2) {
+
+      login({
         variables: {
-          name: Name,
-          email: Email,
+          email:Email,
           password: Pass,
         },
       });
-    
     }
     if(data){
-      toast.success("Registered", {
+      toast.success("Logged in !", {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -86,48 +71,34 @@ const SiginUp = () => {
         progress: undefined,
         theme: "light",
       });
-      const token = data.SignIn;
-      localStorage.setItem("token",token);
-      navigate("/map")
-    }
-    if(error){
+      const token=data.Login;
+       localStorage.setItem("token", token);
+       navigate("/map");
 
-            toast.error(error.message, {
-              position: "top-center",
-              autoClose: 2000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
-            });
     }
+        if (error) {
+          toast.error(error.message, {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
   };
   return (
     <div className="w-full h-full flex justify-center items-center bily">
       <div className="-z-10 w-full h-full absolute">
         <BackGround />
       </div>
-      <div className="flex flex-col z-10 bg-[#151515] sm:rounded-lg p-5 sm:px-10 px-7 items-start sm:w-max w-full sm:h-max h-full ">
+      <div className="flex flex-col z-10 bg-[#151515] sm:rounded-lg p-5 sm:px-10 px-13 items-start sm:w-max w-full sm:h-max h-full">
         <div className="text-slate-50 font-semibold text-[1.7rem] mt-1 flex w-full ">
-          Create a free account!
+          Welcome to Sharead
         </div>
-        <div className="flex flex-col my-3">
-          <span className="text-slate-200 font-thin my-2 text-xl mb-3">
-            Name
-          </span>
-          <input
-            type="text"
-            className="sm:w-72 w-64 h-10 rounded-lg outline-none px-2 py-2 font-medium "
-            ref={name}
-          />
-          {NameErr && (
-            <small className="text-red-600 text-[1rem] ">
-              Please enter the name
-            </small>
-          )}
-        </div>
+
         <div className="flex flex-col ">
           <span className="text-slate-200 font-thin my-2 text-xl mb-3">
             Email
@@ -177,14 +148,14 @@ const SiginUp = () => {
           </button>
         </div>
         <div className="text-slate-50">
-          Already have an account?
+          Don't have an account?
           <span
             className="font-bold"
             onClick={() => {
-              log();
+              sign();
             }}
           >
-            Login
+            SignIn
           </span>{" "}
           instead
         </div>
@@ -193,4 +164,4 @@ const SiginUp = () => {
   );
 };
 
-export default SiginUp;
+export default Login;

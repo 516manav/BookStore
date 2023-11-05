@@ -1,11 +1,14 @@
 import React, { useRef, useState } from 'react'
-import ImageInput from './ImageInput';
-import HoverRating from './Rating';
-import MultipleSelect from './SelectGenre';
+
+import ImageInput from '../components/ImageInput';
+import HoverRating from '../components/Rating';
+import MultipleSelect from '../components/SelectGenre';
+
 import { useMutation } from '@apollo/client';
 import { DONATE_BOOK } from '../queries/querey';
 import { toast } from 'react-toastify';
 import Nav from './Nav';
+
 
 const DonateForm = () => {
    const [donateBook, { data, loading, error }] = useMutation(DONATE_BOOK);

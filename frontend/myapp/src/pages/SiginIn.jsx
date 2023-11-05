@@ -1,43 +1,56 @@
 import React, { useRef, useState } from "react";
-import BackGround from "./BackGround";
+import BackGround from "../components/BackGround";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
-import { LOGIN } from "../queries/querey";
-import {toast} from "react-toastify"
-const Login = () => {
-  const [EmailEmp, setEmailEmp] = useState(false);
-  const [EmailErr, setEmailErr] = useState(false);
+import { SIGN_IN } from "../queries/querey";
+import {toast}from "react-toastify"
+const SiginUp = () => {
+  const [NameErr, setNameErr] = useState(false);
+  const [phoneEmp, setphoneEmp] = useState(false);
+  const [phoneErr, setphoneErr] = useState(false);
   const [PassEmp, setPassEmp] = useState(false);
   const [PassErr, setPassErr] = useState(false);
-  const email = useRef();
+  const name = useRef();
+  const phone = useRef();
   const pass = useRef();
   const navigate = useNavigate();
-  const [login,{data,loading,error}]=useMutation(LOGIN);
-  const sign = () => {
-    navigate("/");
-  };
-  const validateEmail = (email) => {
-    return String(email)
+
+
+  const [resgister,{data,loading,error}]=useMutation(SIGN_IN)
+  const validatephone = (phone) => {
+    return String(phone)
       .toLowerCase()
       .match(
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       );
   };
+  const log = () => {
+    navigate("/login");
+  };
   const handleRegister = (e) => {
-    const Email = email.current.value;
+    const Name = name.current.value;
+    const phone = phone.current.value;
     const Pass = pass.current.value;
-    let b = 0,
+    let a = 0,
+      b = 0,
       c = 0;
 
-    if (!Email) {
-      setEmailEmp(true);
+    if (!Name) {
+      setNameErr(true);
     } else {
-      setEmailEmp(false);
-      if (validateEmail(Email)) {
+      setNameErr(false);
+      a = 1;
+    }
+
+    if (!phone) {
+      setphoneEmp(true);
+    } else {
+      setphoneEmp(false);
+      if (validatephone(phone)) {
         b = 1;
-        setEmailErr(false);
+        setphoneErr(false);
       } else {
-        setEmailErr(true);
+        setphoneErr(true);
       }
     }
     if (!Pass) {
@@ -51,17 +64,19 @@ const Login = () => {
         c = 1;
       }
     }
-    if (b + c === 2) {
-
-      login({
+    if (a + b + c === 3) {
+      
+      resgister({
         variables: {
-          email:Email,
+          name: Name,
+          phone: phone,
           password: Pass,
         },
       });
+    
     }
     if(data){
-      toast.success("Logged in !", {
+      toast.success("Registered", {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -71,50 +86,64 @@ const Login = () => {
         progress: undefined,
         theme: "light",
       });
-      const token=data.Login;
-       localStorage.setItem("token", token);
-       navigate("/map");
-
+      const token = data.SignIn;
+      localStorage.setItem("token",token);
+      navigate("/map")
     }
-        if (error) {
-          toast.error(error.message, {
-            position: "top-center",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
-        }
+    if(error){
+
+            toast.error(error.message, {
+              position: "top-center",
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+    }
   };
   return (
     <div className="w-full h-full flex justify-center items-center bily">
       <div className="-z-10 w-full h-full absolute">
         <BackGround />
       </div>
-      <div className="flex flex-col z-10 bg-[#151515] sm:rounded-lg p-5 sm:px-10 px-13 items-start sm:w-max w-full sm:h-max h-full">
+      <div className="flex flex-col z-10 bg-[#151515] sm:rounded-lg p-5 sm:px-10 px-7 items-start sm:w-max w-full sm:h-max h-full ">
         <div className="text-slate-50 font-semibold text-[1.7rem] mt-1 flex w-full ">
-          Welcome to Sharead
+          Create a free account!
         </div>
-
-        <div className="flex flex-col ">
+        <div className="flex flex-col my-3">
           <span className="text-slate-200 font-thin my-2 text-xl mb-3">
-            Email
+            Name
           </span>
           <input
             type="text"
             className="sm:w-72 w-64 h-10 rounded-lg outline-none px-2 py-2 font-medium "
-            ref={email}
+            ref={name}
           />
-          {EmailEmp && (
+          {NameErr && (
             <small className="text-red-600 text-[1rem] ">
-              Please enter the email
+              Please enter the name
             </small>
           )}
-          {EmailErr && (
-            <small className="text-red-600 text-[1rem] ">Invaild email</small>
+        </div>
+        <div className="flex flex-col ">
+          <span className="text-slate-200 font-thin my-2 text-xl mb-3">
+            phone
+          </span>
+          <input
+            type="text"
+            className="sm:w-72 w-64 h-10 rounded-lg outline-none px-2 py-2 font-medium "
+            ref={phone}
+          />
+          {phoneEmp && (
+            <small className="text-red-600 text-[1rem] ">
+              Please enter the phone
+            </small>
+          )}
+          {phoneErr && (
+            <small className="text-red-600 text-[1rem] ">Invaild phone</small>
           )}
         </div>
         <div className="flex flex-col my-2">
@@ -148,14 +177,14 @@ const Login = () => {
           </button>
         </div>
         <div className="text-slate-50">
-          Don't have an account?
+          Already have an account?
           <span
             className="font-bold"
             onClick={() => {
-              sign();
+              log();
             }}
           >
-            SignIn
+            Login
           </span>{" "}
           instead
         </div>
@@ -164,4 +193,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SiginUp;
