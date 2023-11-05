@@ -3,7 +3,7 @@ import BackGround from "../components/BackGround";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { LOGIN } from "../queries/querey";
-
+import {toast} from "react-toastify"
 const Login = () => {
   const [EmailEmp, setEmailEmp] = useState(false);
   const [EmailErr, setEmailErr] = useState(false);
@@ -61,13 +61,32 @@ const Login = () => {
       });
     }
     if(data){
+      toast.success("Logged in !", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       const token=data.Login;
        localStorage.setItem("token", token);
-       navigate("/home");
+       navigate("/map");
 
     }
         if (error) {
-          alert(error.message);
+          toast.error(error.message, {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
         }
   };
   return (
