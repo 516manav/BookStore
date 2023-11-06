@@ -6,10 +6,10 @@ const Request = require("../models/request");
 
 
 
-const SignIn = async ({ name, email, password }) => {
+const SignIn = async ({ name, email, password, profilePic }) => {
     let hashedPassword = await bycrypt.hash(password, 12);
     const user = await User.create({
-        name: name, email: email, password: hashedPassword
+        name: name, email: email, password: hashedPassword, profilePic: profilePic
     });
     const token = jwt.sign({ userId: user._id,username:user.name,useremail:user.email }, "shivam");
     return token;
@@ -25,7 +25,7 @@ const Login = async ({ email, password }) => {
             throw new Error("User does not exists")
         }
 
-        const matched = await bycrypt.compare(password, user.password);
+        const matched =  bycrypt.compare(password, user.password);
 
         if (matched) {
           

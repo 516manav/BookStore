@@ -1,0 +1,178 @@
+/* Landing page css */
+/* @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@10..48,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@10..48,800&family=Ubuntu&display=swap'); */
+    
+.svpFirstContainer {
+    background-color: orange;
+    height: 100vh;
+}
+
+.svpFirstContainerLogo {
+    filter: invert(1);
+    height: 20%;
+    display: block;
+    margin: auto;
+    padding-top: 8rem;
+}
+
+.svpFirstContainerSlogan {
+    text-align: center;
+    font-size: 5rem;
+    color: white;
+    font-weight: bold;
+    padding: 1rem 10rem;
+    padding-bottom: 3rem;
+    line-height: 1;
+    font-family: 'Bricolage Grotesque';
+}
+
+.svpFirstContainerButtons {
+    display: flex;
+    justify-content: center;
+}
+
+.svpFirstContainerButton {
+    border: 2px solid white;
+    color: white;
+    font-family: 'Ubuntu';
+    width: 18%;
+    text-align: center;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 0 0.5rem;
+}
+
+.svpFirstContainerButton:hover {
+    color: orange;
+    cursor: pointer;
+    transform: translate3d(-3px, -3px, -3px);
+    animation-name: move;
+    animation-duration: 0.2s;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+
+
+
+.svpSecondContainer {
+    height: 100vh;
+    background-image: url('./images/background1.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.svpSecondContainerHeading {
+    font-family: 'Bricolage Grotesque';
+    font-size: 3.34rem;
+    color: orange;
+    margin: 2rem 1rem;
+    width: 60%;
+}
+
+.svpSecondContainerBody {
+    font-family: 'Ubuntu';
+    font-size: 2.2rem;
+    width: 60%;
+    margin: 0rem 1rem;
+    color: orange;
+}
+
+.svpThirdContainer {
+    height: 100vh;
+    background-image: url('./images/background2.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.svpThirdContainerBody {
+    color: white;
+    font-family: 'Bricolage Grotesque';
+    font-size: 6rem;
+    width: 50%;
+    text-align: center;
+}
+
+
+.svpFourthContainer {
+    height: 100vh;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin: 0 3rem;
+}
+
+.svpFourthContainerCardContainer {
+    display: flex;
+}
+
+.svpFourthContainerCards {
+    background-color: orange;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+.svpFourthContainerCards:hover {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    transform: translate3d(-3px, -3px, -3px);
+    animation-name: move;
+    animation-duration: 0.2s;
+}
+
+@keyframes move {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+
+    100% {
+        transform: translate3d(-3px, -3px, -3px);
+    }
+}
+
+.svpFourthContainerCardLogo {
+    width: 15%;
+    margin: 1rem;
+    filter: invert(1);
+    margin-top: 2rem;
+}
+
+.svpFourthContainerCardHeading {
+    font-size: 2.5rem;
+    font-family: 'Bricolage Grotesque';
+    color: white;
+    margin: 1rem;
+}
+
+.svpFourthContainerCardBody {
+    font-family: 'Ubuntu';
+    color: white;
+    margin-bottom: 2rem;
+}
+
+.svpFourthContainerFooterHeading {
+    font-size: 4rem;
+    font-family: 'Bricolage Grotesque';
+    color: orange;
+    margin-bottom: 1rem;
+}
+
+.svpFourthContainerFooterBody {
+    font-family: 'Ubuntu';
+    color: orange;
+}

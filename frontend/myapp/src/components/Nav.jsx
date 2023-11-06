@@ -15,17 +15,24 @@ const Nav = ({ selectPosition, setSelectPosition }) => {
   return (
     <div className="w-full h-full flex justify-between items-center bg-teal-300">
       <div>
-        <Autos
+        {/* <Autos
           selectPosition={selectPosition}
           setSelectPosition={setSelectPosition}
-        ></Autos>
+        ></Autos> */}
+        <input
+          className="input"
+          name="text"
+          placeholder="Search..."
+          type="search"
+        ></input>
       </div>
-      <div className='flex '>
-        <button 
-        onClick={()=>{
-          profile()
-        }}
-        className='bg-cyan-300 text-slate-950 border-none rounded-xl mx-3 font-medium px-3'>
+      <div className="flex ">
+        <button
+          onClick={() => {
+            profile();
+          }}
+          className="bg-cyan-300 text-slate-950 border-none rounded-xl mx-3 font-medium px-3"
+        >
           Profile
         </button>
         <div className="flex text-xl font-semibold mr-5">

@@ -45,7 +45,7 @@ const {gql}=require("apollo-server")
     userEmail:String
   }
   type Mutation{
-    SignIn(name:String,email: String,password:String):String
+    SignIn(name:String,email: String,password:String,profilePic:String):String
     Login(email:String,password:String):String
     DonateBook(title:String,author:String,description:String,contact:String,lat:String,lng:String,price:String,image:String,address:String,gener:String):Books
     CreateRequest(bookId:ID,buyerId:ID,sellerId:ID):String

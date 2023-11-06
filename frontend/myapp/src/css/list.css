@@ -1,0 +1,32 @@
+*{
+    
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    scroll-behavior: smooth;
+}
+.Category-list{
+height:max-content;
+width: 100%;
+border-bottom:1px solid rgb(180, 177, 177) ;
+
+margin: 2% 0 0 0;
+}
+.Category-name{
+    color: #121212;
+    font-weight: 700;
+    font-size: 2.5em;
+    margin: 0 0 0 2%;
+}
+.scroll{
+   height: 300px;
+   width: 100%;
+    display: flex;
+    align-items: center;
+    overflow: auto;
+    white-space: nowrap;
+    margin-top: -1%;
+    margin-bottom:2% ;
+}
+::-webkit-scrollbar {
+    display: none;
+}

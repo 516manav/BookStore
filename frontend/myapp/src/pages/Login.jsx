@@ -23,7 +23,8 @@ const Login = () => {
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       );
   };
-  const handleRegister = (e) => {
+  const handleRegister =() => {
+
     const Email = email.current.value;
     const Pass = pass.current.value;
     let b = 0,
@@ -90,7 +91,7 @@ const Login = () => {
         }
   };
   return (
-    <div className="w-full h-full flex justify-center items-center bily">
+    <div className="w-full h-screen flex justify-center items-center bily">
       <div className="-z-10 w-full h-full absolute">
         <BackGround />
       </div>
@@ -149,14 +150,14 @@ const Login = () => {
         </div>
         <div className="text-slate-50">
           Don't have an account?
-          <span
+          <button
             className="font-bold"
             onClick={() => {
               sign();
             }}
           >
             SignIn
-          </span>{" "}
+          </button>{" "}
           instead
         </div>
       </div>
