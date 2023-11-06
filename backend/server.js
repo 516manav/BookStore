@@ -11,13 +11,9 @@ const server = new ApolloServer({
     resolvers: resolvers,
  
     context: ({ req }) => {
-        console.log("server works")
         const { authorization } = req.headers;
         if (authorization) {
-            console.log("auth")
-
-            console.log(authorization)
-
+         
             const {userId} =jwt.verify(authorization,"shivam");
             return { userId };
         }
@@ -34,15 +30,14 @@ const server = new ApolloServer({
 
 
 
-const url = "mongodb+srv://shivam22:shivam12345678@project.9n9oh9v.mongodb.net/BookStore?retryWrites=true&w=majority"
+const url = "mongodb+srv://shivampatil222004:z1RRqhaD4Pmo8DHv@cluster0.0ca0aus.mongodb.net/Book?retryWrites=true&w=majority"
 mongoose
     .connect(url, {
         autoIndex: true
-
     })
     .then(() => {
         server.listen(3032, () => {
-            console.log("Started at port 3031");
+            console.log("Started at port 3032");
         });
 
     })

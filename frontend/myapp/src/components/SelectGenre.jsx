@@ -12,7 +12,7 @@ export default function SelectSmall({Genre,setGenre}) {
   };
 
   return (
-    <FormControl sx={{  width: 240 }} size="small">
+    <FormControl sx={{ width: 240 }} size="small">
       <InputLabel id="demo-select-small-label"> Genre</InputLabel>
       <Select
         labelId="demo-select-small-label"
@@ -23,7 +23,8 @@ export default function SelectSmall({Genre,setGenre}) {
       >
         <MenuItem value={"Comedey"}>Comedey</MenuItem>
         <MenuItem value={"Thriller"}>Thriller</MenuItem>
-        <MenuItem value={"Romanctic"}>Romanctic</MenuItem>
+        <MenuItem value={"Romantic"}>Romantic</MenuItem>
+        <MenuItem value={"Drama"}>Drama</MenuItem>
       </Select>
     </FormControl>
   );

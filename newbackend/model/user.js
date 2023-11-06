@@ -10,8 +10,6 @@ const UserSchema = new mongoose.Schema({
     password: {
         type: String
     },
-    profilePic: {
-        type: String
-    }
+
 })
 module.exports = mongoose.model('User', UserSchema);

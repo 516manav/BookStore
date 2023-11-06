@@ -1,13 +1,13 @@
 import React from 'react'
 import { useParams } from 'react-router-dom';
-import Nav from './Nav';
+import Nav from '../components/Nav';
 import img1 from "../assets/img1.jpg";
 const Profile = () => {
     const params=useParams();
     const token=params.id
     console.log(token)
   return (
-    <div className="w-full h-full flex justify-center items-center flex-col bg-white overflow-y-auto">
+    <div className="w-full h-screen flex justify-center items-center flex-col bg-white overflow-y-auto">
       <div className="w-full h-20 flex">
         <Nav></Nav>
       </div>
@@ -42,7 +42,7 @@ const Profile = () => {
               <img></img>
             </span>
             <div>
-              <span className=''>Books Donated</span>
+              <span className="">Books Donated</span>
               <span>View the history of donated books</span>
             </div>
           </div>

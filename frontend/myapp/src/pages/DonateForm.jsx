@@ -7,7 +7,7 @@ import MultipleSelect from '../components/SelectGenre';
 import { useMutation } from '@apollo/client';
 import { DONATE_BOOK } from '../queries/querey';
 import { toast } from 'react-toastify';
-import Nav from './Nav';
+import Nav from "../components/Nav"
 
 
 const DonateForm = () => {
@@ -33,12 +33,12 @@ const DonateForm = () => {
             const City = city.current.value;
             const Landmark = landmark.current.value;
             const Phone=contact.current.value;
-            const lati=localStorage.getItem("lat");
-            const lngo=localStorage.getItem("lng")
+            const lat=localStorage.getItem("lat");
+            const lng=localStorage.getItem("lng")
             if(Title&&Author&&Price&&Description&&State&&City&&Landmark&&image.raw&&value&&Genre&&Phone){
-              let addressi=`${Landmark},${City},${State}`
-              let pi=Price.toString();
-              let pho=Phone.toString();
+              let tempAddress=`${Landmark},${City},${State}`
+              let tempPrice=Price.toString();
+              let tempPhone=Phone.toString();
               if(Phone.length==10){
                
                   donateBook({
@@ -46,12 +46,13 @@ const DonateForm = () => {
                       title: Title,
                       author: Author,
                       description: Description,
-                      contact: pho,
-                      price: pi,
-                      image: "image",
-                      address: addressi,
-                      lat: lati,
-                      lng: lngo,
+                      contact: tempPhone,
+                      price: tempPrice,
+                      image:
+                        "https://th.bing.com/th/id/R.c2d982b14b70249c793c8e67ba2762b1?rik=Y5%2b0G9hF0NW7eg&riu=http%3a%2f%2f3.bp.blogspot.com%2f-iOzXJkC4rmE%2fU9n2urXzAKI%2fAAAAAAAAAaA%2fBMKJJDNROzE%2fs1600%2fhp7.jpg&ehk=KopnW61U8kv1i%2fka8izZy8gh3JVT%2fjQyHmEVXu5rrKA%3d&risl=&pid=ImgRaw&r=0",
+                      address: tempAddress,
+                      lat: lat,
+                      lng: lng,
                       genre: Genre,
                     },
                   });

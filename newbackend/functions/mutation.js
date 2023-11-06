@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken")
 const JWT_SECERT = "shivam";
 const User=require("../model/user")
 const Book=require("../model/book")
-const SignIn = async ({ name, email, password }) => {
+const SignIn = async ({ name, email, password ,}) => {
     let hashedPassword = await bycrypt.hash(password, 12);
     const person = await User.findOne({
         email: email

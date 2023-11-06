@@ -10,7 +10,6 @@ const typeDefs = gql`
     name: String
     email: String
     password:String
-    profilePic:String
   }
     type Books{
     _id:ID

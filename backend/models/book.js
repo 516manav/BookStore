@@ -4,8 +4,8 @@ const BookSchema = new mongoose.Schema({
     by: {
         type: String
     },
-    image:{
-        type:String
+    image: {
+        type: String
     },
     title: {
         type: String
@@ -19,18 +19,18 @@ const BookSchema = new mongoose.Schema({
     , description: {
         type: String
     },
-    address:{
-        type:String
+    address: {
+        type: String
     }
     , contact: {
         type: String
     }
     ,
-    lat:{
-        type:String
+    lat: {
+        type: String
     },
-    lng:{
-        type:String
+    lng: {
+        type: String
     }
     , price: {
         type: String

@@ -6,30 +6,29 @@ import { SIGN_IN } from "../queries/querey";
 import {toast}from "react-toastify"
 const SiginUp = () => {
   const [NameErr, setNameErr] = useState(false);
-  const [phoneEmp, setphoneEmp] = useState(false);
-  const [phoneErr, setphoneErr] = useState(false);
+  const [emailEmp, setemailEmp] = useState(false);
+  const [emailErr, setemailErr] = useState(false);
   const [PassEmp, setPassEmp] = useState(false);
   const [PassErr, setPassErr] = useState(false);
   const name = useRef();
-  const phone = useRef();
+  const email = useRef();
   const pass = useRef();
   const navigate = useNavigate();
 
 
   const [resgister,{data,loading,error}]=useMutation(SIGN_IN)
-  const validatephone = (phone) => {
-    return String(phone)
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
-  };
+ function validateEmail(email) {
+  
+   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+   return emailRegex.test(email);
+ }
   const log = () => {
     navigate("/login");
   };
   const handleRegister = (e) => {
+    console.log("running")
     const Name = name.current.value;
-    const phone = phone.current.value;
+    const Email = email.current.value;
     const Pass = pass.current.value;
     let a = 0,
       b = 0,
@@ -42,15 +41,16 @@ const SiginUp = () => {
       a = 1;
     }
 
-    if (!phone) {
-      setphoneEmp(true);
+    if (!Email) {
+      setemailEmp(true);
     } else {
-      setphoneEmp(false);
-      if (validatephone(phone)) {
+      setemailEmp(false);
+      console.log(validateEmail(Email));
+      if (validateEmail(Email)) {
         b = 1;
-        setphoneErr(false);
+        setemailErr(false);
       } else {
-        setphoneErr(true);
+        setemailErr(true);
       }
     }
     if (!Pass) {
@@ -69,12 +69,13 @@ const SiginUp = () => {
       resgister({
         variables: {
           name: Name,
-          phone: phone,
+          email: Email,
           password: Pass,
         },
       });
     
     }
+    
     if(data){
       toast.success("Registered", {
         position: "top-center",
@@ -105,7 +106,7 @@ const SiginUp = () => {
     }
   };
   return (
-    <div className="w-full h-full flex justify-center items-center bily">
+    <div className="w-full h-screen flex justify-center items-center bily">
       <div className="-z-10 w-full h-full absolute">
         <BackGround />
       </div>
@@ -130,20 +131,20 @@ const SiginUp = () => {
         </div>
         <div className="flex flex-col ">
           <span className="text-slate-200 font-thin my-2 text-xl mb-3">
-            phone
+            Email
           </span>
           <input
-            type="text"
+            type="email"
             className="sm:w-72 w-64 h-10 rounded-lg outline-none px-2 py-2 font-medium "
-            ref={phone}
+            ref={email}
           />
-          {phoneEmp && (
+          {emailEmp && (
             <small className="text-red-600 text-[1rem] ">
-              Please enter the phone
+              Please enter the email
             </small>
           )}
-          {phoneErr && (
-            <small className="text-red-600 text-[1rem] ">Invaild phone</small>
+          {emailErr && (
+            <small className="text-red-600 text-[1rem] ">Invaild email</small>
           )}
         </div>
         <div className="flex flex-col my-2">
@@ -178,14 +179,14 @@ const SiginUp = () => {
         </div>
         <div className="text-slate-50">
           Already have an account?
-          <span
+          <button
             className="font-bold"
             onClick={() => {
               log();
             }}
           >
             Login
-          </span>{" "}
+          </button>{" "}
           instead
         </div>
       </div>
