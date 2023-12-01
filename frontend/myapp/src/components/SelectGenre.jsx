@@ -4,7 +4,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
-export default function SelectSmall({Genre,setGenre}) {
+export default function SelectSmall({Genre,setGenre,GenreList}) {
   
 
   const handleChange = (event) => {
@@ -21,11 +21,11 @@ export default function SelectSmall({Genre,setGenre}) {
         label="Age"
         onChange={handleChange}
       >
-        <MenuItem value={"Comedey"}>Comedey</MenuItem>
-        <MenuItem value={"Thriller"}>Thriller</MenuItem>
-        <MenuItem value={"Romantic"}>Romantic</MenuItem>
-        <MenuItem value={"Drama"}>Drama</MenuItem>
-      </Select>
+        {GenreList.map((item,index)=>{
+          return <MenuItem key={index} value={item}>{item}</MenuItem>;
+        })}
+      
+      </Select> 
     </FormControl>
   );
 }

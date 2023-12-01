@@ -77,7 +77,7 @@ const SiginUp = () => {
     }
     
     if(data){
-      toast.success("Registered", {
+      toast.success("Registered successfully", {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -88,7 +88,12 @@ const SiginUp = () => {
         theme: "light",
       });
       const token = data.SignIn;
+      const user=data.SignIn.user;
+      const id=user._id;
+      const tempname=user.name;
       localStorage.setItem("token",token);
+       localStorage.setItem("user", id);
+       localStorage.setItem("name",tempname);
       navigate("/map")
     }
     if(error){

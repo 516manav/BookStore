@@ -2,7 +2,7 @@ import React from 'react'
 import Autos from './Auto';
 import { useNavigate } from 'react-router-dom';
 
-const Nav = ({ selectPosition, setSelectPosition }) => {
+const Nav = ({ selectPosition, setSelectPosition,page,setSearch}) => {
   const navigate=useNavigate();
   const logout=()=>{
     localStorage.clear();
@@ -13,25 +13,29 @@ const Nav = ({ selectPosition, setSelectPosition }) => {
     navigate('/home/profile')
   }
   return (
-    <div className="w-full h-full flex justify-between items-center bg-teal-300">
+    <div className="w-full h-full py-2 flex justify-between items-center border-solid border-b-2 border-gray-300 ">
       <div>
-        {/* <Autos
-          selectPosition={selectPosition}
-          setSelectPosition={setSelectPosition}
-        ></Autos> */}
-        <input
-          className="input"
-          name="text"
-          placeholder="Search..."
-          type="search"
-        ></input>
+        {page == "map" && (
+          <Autos
+            selectPosition={selectPosition}
+            setSelectPosition={setSelectPosition}
+          ></Autos>
+        )}
+        {page == "home" && (
+          <input
+            className="input"
+            name="text"
+            placeholder="Search..."
+            type="search"
+          ></input>
+        )}
       </div>
       <div className="flex ">
         <button
           onClick={() => {
             profile();
           }}
-          className="bg-cyan-300 text-slate-950 border-none rounded-xl mx-3 font-medium px-3"
+          className="bg-blue-500 text-white text-lg font-semibold border-none rounded-lg mx-3  px-3"
         >
           Profile
         </button>
@@ -40,7 +44,7 @@ const Nav = ({ selectPosition, setSelectPosition }) => {
             onClick={() => {
               logout();
             }}
-            className="bg-red-500 text-slate-50 px-4 py-1 rounded-lg font-medium"
+            className="bg-red-500 text-slate-50 px-4 py-1 rounded-lg font-semibold"
           >
             Logout
           </button>

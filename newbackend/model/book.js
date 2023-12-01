@@ -4,6 +4,9 @@ const BookSchema = new mongoose.Schema({
     by: {
         type: String
     },
+    sellerName:{
+        type:String
+    },
     image: {
         type: String
     },
@@ -36,9 +39,14 @@ const BookSchema = new mongoose.Schema({
         type: String
     },
     buyerId: {
-        type: String,
-        require: true
-
+        type: String
+    },
+    buyerName:{
+        type:String 
+    },
+    rating:{
+        type:Number,
+        require:true
     },
     status: {
         type: String,

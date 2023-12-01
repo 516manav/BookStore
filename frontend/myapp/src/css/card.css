@@ -4,14 +4,7 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-.card{
-    height:75%;
-    width: 25em;
-    background-color:white;
-    border-radius: 10px;
-    margin: 0 1% 0 1%;
-    border: 1px solid #121212;
-}
+
 .cover{
     height: 55%;
     width: 8em;
@@ -52,12 +45,17 @@ border-radius: 10px;
     justify-content: space-between;
 }
 
-
+.card{
+    position: relative;
+}
 
 .card-button {
-    /* transform: translate(-50%, 125%); */
-    transform: translateY(3em);
+ 
+  
     width: 100%;
+    bottom: 0;
+    left: 0;
+    position: absolute;
     border-radius: 1rem;
     border: none;
     background-color: #FFCE1A;
@@ -65,13 +63,21 @@ border-radius: 10px;
     font-size: 0.7rem;
     font-weight: 700;
     padding: .5rem 1rem;
-    /* position: absolute; */
-    /* left: 50%; */
-/* 
-    bottom: -25%; */
-    
     opacity: 0;
-    transition: 0.3s ease-out;
+    transition: all 0.7s ease-out;
+}
+
+
+.mapCardbtn{
+        width: max-content;
+        border-radius: 1rem;
+        border: none;
+        background-color: #FFCE1A;
+        color: #0c0a0a;
+        font-size: 0.7rem;
+        font-weight: 700;
+        padding:5px 15px;
+        margin: 6px 0;
 }
 .card:hover {
     border:1px solid #fbeebe;
@@ -79,6 +85,6 @@ border-radius: 10px;
 }
 
 .card:hover .card-button {
-    transform: translateY(0.5em);
+    
     opacity: 1;
 }

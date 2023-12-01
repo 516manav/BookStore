@@ -23,8 +23,8 @@ const Login = () => {
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       );
   };
-  const handleRegister =() => {
-
+  const handleRegister =async() => {
+   
     const Email = email.current.value;
     const Pass = pass.current.value;
     let b = 0,
@@ -54,14 +54,15 @@ const Login = () => {
     }
     if (b + c === 2) {
 
-      login({
+     await login({
         variables: {
           email:Email,
           password: Pass,
         },
       });
     }
-    if(data){
+    console.log(data);
+    if(data){ 
       toast.success("Logged in !", {
         position: "top-center",
         autoClose: 5000,
@@ -72,8 +73,13 @@ const Login = () => {
         progress: undefined,
         theme: "light",
       });
-      const token=data.Login;
-       localStorage.setItem("token", token);
+      const token=data.Login.token;
+         const user = data.Login.user;
+         const id = user._id;
+         const tempname = user.name;
+         localStorage.setItem("token", token);
+         localStorage.setItem("user", id);
+         localStorage.setItem("name", tempname);
        navigate("/map");
 
     }

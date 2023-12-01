@@ -1,4 +1,5 @@
 const { SignIn, Login, GetAllUsers, DonateBook } = require("./functions/mutation");
+const { GenreBooks, GetAllBooks, GetRequests, GetPendingReq, GetBooksSold, GetBookReceived, SearchBooks } = require("./functions/query");
 
 
 
@@ -8,6 +9,24 @@ const resolvers = {
         users: () => {
             return GetAllUsers();
         },
+        GenreBook:(_,args)=>{
+            return GenreBooks(args);
+        },
+        GetAllBooks:()=>{
+            return GetAllBooks();
+        },
+        GetRequests:(_,args)=>{
+            return GetRequests(args);
+        },
+        GetPendingReq: (_,args) => {
+            return GetPendingReq(args);
+        },
+        GetBooksSold: (_, args) => {
+            return GetBooksSold(args);
+        },
+        GetBookReceived: (_, args) => {
+            return GetBookReceived(args)
+        }
     },
     Books:{
         userD:(_,args,{name,email})=>{
@@ -26,8 +45,12 @@ const resolvers = {
         Login: (parent, args) => {
             return Login(args)
         },
-        DonateBook: (_, args, { userId }) => {
-            return DonateBook({ ...args, userId: userId })
+        DonateBook: (parent, args) => {
+            return DonateBook(args)
+        },
+
+        SearchBooks: (_, args) => {
+            return SearchBooks(args)
         }
 
     }

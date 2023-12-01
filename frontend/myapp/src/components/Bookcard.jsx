@@ -1,43 +1,50 @@
 import "../css/card.css";
 import React, { useState } from "react";
+import CustomizedDialogs from "./Dialog";
 
-const Card = ({ showcard }) => {
+const Card = ({ showcard, book }) => {
+  const {
+    title,
+    author,
+    address,
+    by,
+    buyerId,
+    contact,
+    description,
+    lat,
+    lng,
+    price,
+    status,
+    image,
+    genre,
+  } = book;
+
   return (
-    //  <div className="main">
-    //     <article className="card" >
-    //     <section className="cover">
-    //     <img src={image} alt={title}className="img-container"/>
-    //     </section>
-    //     <section className="details">
-    //         <div className="category">{Category}</div>
-    //         <div className="title">{title}</div>
-    //         <div className="Author">{Author}</div>
-    //         <div className="footer">
-    //             <button className="cart"><GrCart/>Add to cart</button>
-    //             <button className="info"><AiOutlineInfoCircle></AiOutlineInfoCircle></button>
-    //             <button className="fav"onClick={()=>setfav(!fav)}>{fav?<AiFillHeart className="fill"/>:<AiOutlineHeart/>}</button>
-    //             </div>
-    //     </section>
-    // </article>
-    // </div>
     <>
-      <article className="card">
-        <section className="cover">
+      <article className="card min-w-[12rem] max-w-[12rem] flex flex-col h-80 bg-slate-200 mx-3 rounded-xl border-solid border-2 border-slate-800">
+        <section className="flex h-44">
           <img
-            src="https://th.bing.com/th/id/OIP.hnClNwesqw4d2kUL9x4PggHaHa?pid=ImgDet&rs=1"
-            alt="title"
-            className="img-container"
+            src={image}
+            alt={title}
+            className="flex w-full h-full rounded-lg object-fill"
           />
         </section>
-        <section className="details">
-          <div className="category">Category</div>
-          <div className="title">Title</div>
-          <div className="Author">Author</div>
-          <div className="foot">
-            <button className="card-button" onClick={() => showcard(true)}>
-              More info
-            </button>
+        <section className="flex flex-col p-2">
+          <div className="text-xl font-semibold">{genre}</div>
+          <div className="text-xl font-extrabold max-h-[4rem]  overflow-clip">
+            {title}
           </div>
+          <div className="text-lg font-thin">{author}</div>
+          <CustomizedDialogs
+            image={image}
+            title={title}
+            description={description}
+            by={by}
+            contact={contact}
+            address={address}
+            price={price}
+            page="home"
+          />
         </section>
       </article>
     </>

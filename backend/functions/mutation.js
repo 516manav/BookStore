@@ -6,12 +6,19 @@ const Request = require("../models/request");
 
 
 
-const SignIn = async ({ name, email, password, profilePic }) => {
+const SignIn = async ({ name, email, password, }) => {
     let hashedPassword = await bycrypt.hash(password, 12);
+    const person = await User.findOne({
+        email: email
+    })
+    if (person) {
+        throw new Error("Email already exists")
+    }
     const user = await User.create({
-        name: name, email: email, password: hashedPassword, profilePic: profilePic
+        name: name, email: email, password: hashedPassword, profilePic: "none"
     });
-    const token = jwt.sign({ userId: user._id,username:user.name,useremail:user.email }, "shivam");
+
+    const token = jwt.sign({ userId: user._id, name: user.name, email: user.email }, JWT_SECERT);
     return token;
 }
 

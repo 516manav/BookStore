@@ -1,110 +1,157 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState } from "react";
 
-import ImageInput from '../components/ImageInput';
-import HoverRating from '../components/Rating';
-import MultipleSelect from '../components/SelectGenre';
+import ImageInput from "../components/ImageInput";
+import HoverRating from "../components/Rating";
+import MultipleSelect from "../components/SelectGenre";
+import axios from "axios";
 
-import { useMutation } from '@apollo/client';
-import { DONATE_BOOK } from '../queries/querey';
-import { toast } from 'react-toastify';
-import Nav from "../components/Nav"
-
+import { toast } from "react-toastify";
+import Nav from "../components/Nav";
+import { useMutation } from "@apollo/client";
+import { DONATE_BOOK } from "../queries/querey";
 
 const DonateForm = () => {
-   const [donateBook, { data, loading, error }] = useMutation(DONATE_BOOK);
-     const [image, setImage] = useState({ preview: "", raw: "" });
-    const [value, setValue] = useState(2);
-    const [Genre, setGenre] = useState("");
-    const title=useRef();
-    const author=useRef();
-    const price=useRef();
-    const description=useRef();
-    const state=useRef();
-    const city=useRef();
-    const landmark=useRef();
-    const contact =useRef();
-    const HandleSubmit=()=>{
+  const [donateBook, { data, loading, error }] = useMutation(DONATE_BOOK);
+  const [image, setImage] = useState({ preview: "", raw: "" });
+  const [value, setValue] = useState(2);
+  const [Genre, setGenre] = useState("");
+  const [imgurl, setImageUrl] = useState("");
+  const[loader,setLoader]=useState(false)
+  const title = useRef();
+  const author = useRef();
+  const price = useRef();
+  const description = useRef();
+  const state = useRef();
+  const city = useRef();
+  const landmark = useRef();
+  const contact = useRef();
+  const uploadImage = async () => {
+    try {
+      if (image.raw) {
+        let img = new FormData();
+        img.append("file", image.raw),
+          img.append("cloud_name", "dum5yprjm"),
+          img.append("upload_preset", "sucmb5lu");
+        let response = await fetch(
+          "https://api.cloudinary.com/v1_1/dum5yprjm/image/upload",
+          {
+            method: "post",
+            body: img,
+          }
+        );
+        response = await response.json();
+        return response.url;
+      }
+    } catch (e) {
+      console.log(e.message);
+       toast.error(e.message, {
+         position: "top-center",
+         autoClose: 2000,
+         hideProgressBar: false,
+         closeOnClick: true,
+         pauseOnHover: true,
+         draggable: true,
+         progress: undefined,
+         theme: "light",
+       });
+    }
+  };
 
-            const Title = title.current.value;
-            const Author =author.current.value ;
-            const Price = price.current.value;
-            const Description = description.current.value;
-            const State = state.current.value;
-            const City = city.current.value;
-            const Landmark = landmark.current.value;
-            const Phone=contact.current.value;
-            const lat=localStorage.getItem("lat");
-            const lng=localStorage.getItem("lng")
-            if(Title&&Author&&Price&&Description&&State&&City&&Landmark&&image.raw&&value&&Genre&&Phone){
-              let tempAddress=`${Landmark},${City},${State}`
-              let tempPrice=Price.toString();
-              let tempPhone=Phone.toString();
-              if(Phone.length==10){
-               
-                  donateBook({
-                    variables: {
-                      title: Title,
-                      author: Author,
-                      description: Description,
-                      contact: tempPhone,
-                      price: tempPrice,
-                      image:
-                        "https://th.bing.com/th/id/R.c2d982b14b70249c793c8e67ba2762b1?rik=Y5%2b0G9hF0NW7eg&riu=http%3a%2f%2f3.bp.blogspot.com%2f-iOzXJkC4rmE%2fU9n2urXzAKI%2fAAAAAAAAAaA%2fBMKJJDNROzE%2fs1600%2fhp7.jpg&ehk=KopnW61U8kv1i%2fka8izZy8gh3JVT%2fjQyHmEVXu5rrKA%3d&risl=&pid=ImgRaw&r=0",
-                      address: tempAddress,
-                      lat: lat,
-                      lng: lng,
-                      genre: Genre,
-                    },
-                  });
-                  alert("donate");
-              }
-              else{
-               toast.error("Invaild contact", {
-                 position: "top-center",
-                 autoClose: 2000,
-                 hideProgressBar: false,
-                 closeOnClick: true,
-                 pauseOnHover: true,
-                 draggable: true,
-                 progress: undefined,
-                 theme: "light",
-               });
-              }
-                
-            }
-            else{
-             toast.error("Few feilds are empty", {
-               position: "top-center",
-               autoClose: 2000,
-               hideProgressBar: false,
-               closeOnClick: true,
-               pauseOnHover: true,
-               draggable: true,
-               progress: undefined,
-               theme: "light",
-             });
-            }
-          }
-          if(data){
-            console.log(data);
-                  toast.success("Book Registered", {
-                    position: "top-center",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                  });
-          }
-          if(error){
-            console.log(error.message)
-          }
+  const HandleSubmit = async () => {
+    setLoader(true);
+    const Title = title.current.value;
+    const Author = author.current.value;
+    const Price = price.current.value;
+    const Description = description.current.value;
+    const State = state.current.value;
+    const City = city.current.value;
+    const Landmark = landmark.current.value;
+    const Phone = contact.current.value;
+    const lat = localStorage.getItem("lat");
+    const lng = localStorage.getItem("lng");
+    const tempname = localStorage.getItem("name");
+    const sellerId = localStorage.getItem("user");
+    
+    if (
+      Title &&
+      Author &&
+      Price &&
+      Description &&
+      State &&
+      City &&
+      Landmark &&
+      image.raw &&
+      value &&
+      Genre &&
+      Phone
+    ) {
+      const imgs = await uploadImage();
+      let tempAddress = `${Landmark},${City},${State}`;
+      let tempPrice = Price.toString();
+      let tempPhone = Phone.toString();
+      if (Phone.length == 10) {
+        donateBook({
+          variables: {
+            genre: Genre,
+            title: Title,
+            author: Author,
+            description: Description,
+            contact: tempPhone,
+            lat: lat,
+            lng: lng,
+            price: tempPrice,
+            image: imgs,
+            address: tempAddress,
+            userId: sellerId,
+            rating: value,
+            sellerName: tempname,
+          },
+        });
+       
+        if (data) {
+         
+          toast.success("Book Registered", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+           setLoader(false);
+          
+        }
+      } else {
+        toast.error("Invaild contact", {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
+    } else {
+      toast.error("Few feilds are empty", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  };
 
   return (
     <div className="w-full h-max flex flex-col justify-center items-center sm:bg-[whitesmoke] overflow-y-scroll">
-      <div className='h-16 w-full'>
+      <div className="h-16 w-full">
         <Nav></Nav>
       </div>
 
@@ -137,6 +184,7 @@ const DonateForm = () => {
               <MultipleSelect
                 Genre={Genre}
                 setGenre={setGenre}
+                GenreList={["Thriller", "Comedey", "Romantic", "Drama"]}
               ></MultipleSelect>
             </div>
             <div className="w-full flex flex-col my-3">
@@ -215,12 +263,12 @@ const DonateForm = () => {
             }}
             className="text-white bg-[#151515] px-7 py-1 rounded-md text-2xl "
           >
-            Donate
+            {loader?"Loading":"Donate"}
           </button>
         </div>
       </div>
     </div>
   );
-}
+};
 
-export default DonateForm
+export default DonateForm;
