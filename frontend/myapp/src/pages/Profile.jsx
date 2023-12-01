@@ -1,6 +1,11 @@
 import React from 'react'
 import { useParams } from 'react-router-dom';
 import Nav from '../components/Nav';
+import '../css/profile.css';
+import prebought from '../assets/Previously bought.png'
+import presold from '../assets/Sell Request.png';
+import buy from '../assets/buy Request.png';
+import sell from '../assets/shopping-cart.png';
 import img1 from "../assets/img1.jpg";
 const Profile = () => {
     const params=useParams();
@@ -36,17 +41,13 @@ const Profile = () => {
             <span className="text-[2rem] font-medium">30</span>
           </div>
         </div>
-        <div className="flex w-full h-full flex-wrap">
-          <div className="flex border-solid border-black border-2 rounded-lg">
-            <span>
-              <img></img>
-            </span>
-            <div>
-              <span className="">Books Donated</span>
-              <span>View the history of donated books</span>
-            </div>
-          </div>
+        <div className="container">
+          <a><img src={prebought} alt="" />Previously Bought</a>
+          <a><img src={presold} alt="" />Previously Sold</a>
+          <a><img src={buy} alt="" />Buy Request</a>
+          <a><img src={sell} alt="" />Sell Request</a>
         </div>
+        
       </div>
     </div>
   );
